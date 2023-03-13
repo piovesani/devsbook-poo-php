@@ -5,7 +5,7 @@ $base = 'http://localhost/php/devsbook';
 $db_name = 'devsbook';
 $db_host = 'localhost';
 $db_user = 'root';
-$db_pass = 'R@2023!';
+$db_pass = '';
 
 $maxWidth = 800;
 $maxHeight = 800;
