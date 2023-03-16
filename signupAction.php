@@ -2,7 +2,6 @@
 require 'config.php';
 require 'models/Auth.php';
 
-echo $base;
 
 $name = filter_input(INPUT_POST, 'name');
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
