@@ -1,11 +1,26 @@
 <?php
+ini_set('error_reporting', E_ALL); // mesmo resultado de: error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+echo __DIR__;
 require_once 'config.php';
 require_once 'models/Auth.php';
+require 'dao/UserRelationDaoMysql.php';
 
 $auth = new Auth($pdo, $base);
 $userInfo = $auth->checkToken();
 
 $activeMenu = 'home';
+
+echo $userInfo->id;
+exit;
+
+$urDao = new UserRelationDaoMysql($pdo);
+$userList = $urDao->getRelationsFrom($userInfo->id);
+
+
+print_r($userInfo);
+exit;
 
 require 'partials/header.php';
 

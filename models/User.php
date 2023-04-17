@@ -18,3 +18,4 @@ interface UserDAO {
     public function update(User $u);
     public function insert(User $u);
 }
+
