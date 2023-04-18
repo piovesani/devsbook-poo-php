@@ -86,7 +86,7 @@ class UserDaoMysql implements UserDAO {
 
             if($sql->rowCount() > 0) {
                 $data = $sql->fetch(PDO::FETCH_ASSOC);
-                $user = $this->generateUser($data, $full);
+                $user = $this->generateUser($data);
                 return $user;
             }
         }

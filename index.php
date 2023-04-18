@@ -1,26 +1,22 @@
 <?php
-ini_set('error_reporting', E_ALL); // mesmo resultado de: error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//ni_set('error_reporting', E_ALL); // mesmo resultado de: error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
-echo __DIR__;
 require_once 'config.php';
 require_once 'models/Auth.php';
-require 'dao/UserRelationDaoMysql.php';
+require_once 'dao/PostDaoMysql.php';
 
 $auth = new Auth($pdo, $base);
 $userInfo = $auth->checkToken();
 
 $activeMenu = 'home';
 
-echo $userInfo->id;
-exit;
+$postDao = new PostDaoMysql($pdo);
+$feed = $postDao->getHomeFeed($userInfo->id);
 
-$urDao = new UserRelationDaoMysql($pdo);
-$userList = $urDao->getRelationsFrom($userInfo->id);
-
-
-print_r($userInfo);
-exit;
+//echo "<pre>";
+//print_r($feed);
+//exit;
 
 require 'partials/header.php';
 
@@ -32,6 +28,10 @@ require 'partials/menu.php';
         <div class="column pr-5">
 
         <?php require 'partials/feedEditor.php'; ?>
+
+        <?php foreach($feed as $item): ?>
+            <?php require 'partials/feedItem.php'; ?>
+        <?php endforeach; ?>
 
         </div>
         <div class="column side pl-5">

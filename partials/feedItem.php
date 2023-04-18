@@ -1,28 +1,47 @@
+<?php
+$actionPhrase = '';
+
+switch($item->type){
+    case 'text':
+        $actionPhrase = 'fez um post';
+    break;
+
+    case 'photo':
+        $actionPhrase = 'postou uma foto';
+    break;
+}
+
+?>
+
 
 <div class="box feed-item">
     <div class="box-body">
         <div class="feed-item-head row mt-20 m-width-20">
             <div class="feed-item-head-photo">
-                <a href=""><img src="media/avatars/avatar.jpg" /></a>
+                <a href="<?php echo $base; ?>/perfil.php?id=<?php echo $item->user->id; ?>">
+                <img src="<?php echo $base; ?>/media/avatars/<?php echo $item->user->avatar; ?>" /></a>
             </div>
             <div class="feed-item-head-info">
-                <a href=""><span class="fidi-name">Bonieky Lacerda</span></a>
-                <span class="fidi-action">fez um post</span>
+                <a href="<?php echo $base; ?>/perfil.php?id=<?php echo $item->user->id; ?>">
+                <span class="fidi-name"><?php echo $item->user->name; ?></span></a>
+                <span class="fidi-action"><?php echo $actionPhrase; ?></span>
                 <br/>
-                <span class="fidi-date">07/03/2020</span>
+                <span class="fidi-date">
+                    
+                <?php echo date('d/m/Y', strtotime($item->createdAt)); ?>
+                </span>
             </div>
             <div class="feed-item-head-btn">
-                <img src="assets/images/more.png" />
+                <img src="<?php echo $base; ?>/assets/images/more.png" />
             </div>
         </div>
         <div class="feed-item-body mt-10 m-width-20">
-            Pessoal, tudo bem! Busco parceiros para empreender comigo em meu software.<br/><br/>
-            Acabei de aprová-lo na Appstore. É um sistema de atendimento via WhatsApp multi-atendentes para auxiliar empresas.<br/><br/>
-            Este sistema permite que vários funcionários/colaboradores da empresa atendam um mesmo número de WhatsApp, mesmo que estejam trabalhando remotamente, sendo que cada um acessa com um login e senha particular....
+        <?php echo nl2br($item->body); ?>
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
-            <div class="like-btn on">56</div>
-            <div class="msg-btn">3</div>
+            <div class="like-btn <?php echo $item->liked ? 'on' : ''; ?>">
+            <?php echo $item->like; ?></div>
+            <div class="msg-btn"><?php echo count($item->comments); ?></div>
         </div>
         <div class="feed-item-comments">
             
@@ -48,7 +67,8 @@
 
             <div class="fic-answer row m-height-10 m-width-20">
                 <div class="fic-item-photo">
-                    <a href=""><img src="media/avatars/avatar.jpg" /></a>
+                    <a href="<?php echo $base; ?>/perfil.php; ?>">
+                    <img src="<?php echo $base; ?>/media/avatars/<?php echo $userInfo->avatar; ?>" /></a>
                 </div>
                 <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
             </div>
@@ -56,11 +76,3 @@
         </div>
     </div>
 </div>
-
-        
-
-   
-
-       
-   
-    

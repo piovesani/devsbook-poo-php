@@ -1,5 +1,6 @@
 <?php
 class Post{
+    public $id;
     public $idUser;
     public $type;
     public $createdAt;
@@ -8,4 +9,5 @@ class Post{
 
 interface PostDAO {
     public function insert(Post $p);
+    public function getHomeFeed($idUser);
 }
